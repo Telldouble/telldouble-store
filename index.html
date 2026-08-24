@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="description" content="Telldouble Productions / Dream B.I.G. Beats, stems, creator tools, AI systems, templates and digital products." />
+<meta name="theme-color" content="#0D0F12" />
+<title>Telldouble Productions / Dream B.I.G.</title>
+<style>
+:root {
+  --bg: #0d0f12;
+  --surface: #161920;
+  --surface-2: #1b1f28;
+  --surface-3: #11141a;
+  --border: #222734;
+  --border-hover: #303849;
+  --text: #f5f7fb;
+  --text-secondary: #9aa3b2;
+  --text-muted: #697283;
+  --blue: #2b6bff;
+  --blue-bright: #4b82ff;
+  --blue-glow: rgba(43, 107, 255, 0.28);
+  --green: #10b981;
+  --green-glow: rgba(16, 185, 129, 0.22);
+  --red: #ff496d;
+  --purple: #8b5cf6;
+  --cyan: #22d3ee;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  --container: 1180px;
+  --transition: 180ms cubic-bezier(.2,.8,.2,1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at 15% 0%, rgba(43, 107, 255, 0.09), transparent 30%),
+              radial-gradient(circle at 90% 20%, rgba(139, 92, 246, 0.07), transparent 28%),
+              var(--bg);
+  color: var(--text);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, select { font: inherit; }
+button { border: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+.app {
+  width: min(100%, var(--container));
+  margin: 0 auto;
+  padding: 18px 18px calc(90px + env(safe-area-inset-bottom));
+}
+
+.brand-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.brand-mark {
+  width: 46px; height: 46px; flex: 0 0 46px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(43, 107, 255, 0.35), rgba(139, 92, 246, 0.15)), var(--surface);
+  box-shadow: 0 0 30px rgba(43, 107, 255, 0.12);
+  font-size: 18px; font-weight: 900; letter-spacing: -0.08em;
+}
+
+.brand-copy { min-width: 0; }
+.brand-copy h1 { font-size: 15px; line-height: 1.1; letter-spacing: -0.02em; }
+.brand-copy p { color: var(--text-muted); font-size: 11px; margin-top: 4px; }
+
+.status-pill {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 10px; border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 999px; color: #7ff1c8; background: rgba(16, 185, 129, 0.08);
+  font-size: 10px; font-weight: 800; white-space: nowrap;
+}
+.status-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green); box-shadow: 0 0 10px var(--green);
+}
+
+.hero {
+  position: relative; overflow: hidden; padding: 28px 22px; margin-bottom: 18px;
+  border: 1px solid var(--border); border-radius: var(--radius-xl);
+  background: linear-gradient(135deg, rgba(43, 107, 255, 0.11), transparent 45%),
+              linear-gradient(315deg, rgba(139, 92, 246, 0.08), transparent 45%),
+              var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.eyebrow { color: var(--blue-bright); font-size: 10px; font-weight: 900; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 10px; }
+.hero h2 { max-width: 700px; font-size: clamp(30px, 7vw, 62px); line-height: 0.98; letter-spacing: -0.055em; margin-bottom: 14px; }
+.hero h2 span { background: linear-gradient(90deg, #fff, #6f9bff, #a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero p { max-width: 680px; color: var(--text-secondary); font-size: 14px; }
+
+.hero-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 20px; }
+.hero-button {
+  min-height: 42px; padding: 0 16px; border-radius: 12px; color: white;
+  background: var(--blue); font-size: 12px; font-weight: 800;
+  box-shadow: 0 8px 24px var(--blue-glow); transition: transform var(--transition), box-shadow var(--transition);
+}
+.hero-button:hover { transform: translateY(-2px); box-shadow: 0 12px 32px var(--blue-glow); }
+.hero-button.secondary { color: var(--text); background: rgba(255,255,255,0.04); border: 1px solid var(--border); box-shadow: none; }
+
+.audio-player {
+  position: sticky; top: 10px; z-index: 50; display: grid; grid-template-columns: auto 1fr auto;
+  gap: 12px; align-items: center; padding: 11px; margin-bottom: 18px;
+  border: 1px solid var(--border); border-radius: 18px; background: rgba(22, 25, 32, 0.9);
+  backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 12px 40px rgba(0,0,0,.35);
+}
+
+.play-button { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; background: var(--blue); color: white; box-shadow: 0 5px 20px var(--blue-glow); }
+.track-info { min-width: 0; }
+.track-title { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 800; }
+.track-title small { color: var(--text-muted); font-size: 9px; font-weight: 600; }
+
+.waveform { height: 28px; display: flex; align-items: center; gap: 2px; overflow: hidden; margin-top: 3px; }
+.waveform span { width: 2px; min-width: 2px; border-radius: 4px; background: var(--blue-bright); opacity: 0.75; animation: waveform 1.1s ease-in-out infinite alternate; }
+.waveform span:nth-child(2n) { animation-delay: -.4s; }
+.waveform span:nth-child(3n) { animation-delay: -.7s; }
+.waveform span:nth-child(4n) { animation-delay: -.2s; }
+
+@keyframes waveform {
+  from { transform: scaleY(.25); }
+  to { transform: scaleY(1); }
+}
+
+.sales-stats { display: none; gap: 14px; }
+.stat { text-align: right; }
+.stat-value { font-size: 12px; font-weight: 900; }
+.stat-label { color: var(--text-muted); font-size: 8px; text-transform: uppercase; letter-spacing: .08em; }
+
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+.filters { display: flex; gap: 7px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.filters::-webkit-scrollbar { display: none; }
+.filter-button { padding: 8px 11px; border: 1px solid var(--border); border-radius: 999px; color: var(--text-secondary); background: var(--surface); font-size: 10px; font-weight: 800; transition: color var(--transition), background var(--transition), border var(--transition); }
+.filter-button.active { color: white; border-color: rgba(43,107,255,.5); background: rgba(43,107,255,.14); }
+
+.view-switch { display: flex; flex: 0 0 auto; padding: 3px; border: 1px solid var(--border); border-radius: 11px; background: var(--surface); }
+.view-button { width: 32px; height: 28px; border-radius: 8px; color: var(--text-muted); background: transparent; }
+.view-button.active { color: white; background: var(--surface-2); }
+
+.product-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.product-grid.row-view { grid-template-columns: 1fr; }
+
+.product-card {
+  position: relative; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius-lg);
+  background: linear-gradient(145deg, rgba(255,255,255,.025), transparent 45%), var(--surface);
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+.product-card:hover { transform: translateY(-3px); border-color: var(--border-hover); box-shadow: 0 16px 45px rgba(0,0,0,.35), 0 0 30px rgba(43,107,255,.05); }
+
+.product-card-inner { padding: 12px; }
+.thumbnail { position: relative; overflow: hidden; aspect-ratio: 1/1; border-radius: 15px; border: 1px solid rgba(255,255,255,.06); background: #080a0d; margin-bottom: 12px; }
+
+.thumb-audio { background: radial-gradient(circle at 50% 55%, rgba(43,107,255,.5), transparent 35%), linear-gradient(145deg,#111827,#030507); }
+.thumb-audio .big-type { position: absolute; inset: 20px; display: grid; place-items: center; font-size: clamp(30px, 8vw, 54px); font-weight: 1000; line-height: .8; letter-spacing: -.09em; color: #dbe7ff; text-shadow: 0 0 10px rgba(43,107,255,.7), 4px 5px 0 #202838; }
+
+.audio-wave { position: absolute; left: 10%; right: 10%; bottom: 17%; height: 70px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+.audio-wave i { display: block; width: 3px; height: 30%; border-radius: 10px; background: var(--blue-bright); box-shadow: 0 0 9px var(--blue); }
+.audio-wave i:nth-child(2n) { height: 55%; }
+.audio-wave i:nth-child(3n) { height: 85%; }
+.audio-wave i:nth-child(4n) { height: 42%; }
+
+.thumb-book { background: radial-gradient(circle at 30% 25%, rgba(255,255,255,.14), transparent 20%), linear-gradient(135deg, #201b24, #050506); }
+.book-cover { position: absolute; width: 58%; height: 78%; left: 21%; top: 11%; padding: 17px; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(135deg, rgba(255,255,255,.08), transparent), #111216; border: 1px solid rgba(255,255,255,.16); box-shadow: 18px 18px 35px rgba(0,0,0,.6); transform: perspective(700px) rotateY(-9deg); }
+.book-cover strong { font-size: clamp(14px, 4vw, 24px); line-height: .95; letter-spacing: -.05em; }
+.book-cover small { color: #999; font-size: 7px; letter-spacing: .12em; text-transform: uppercase; }
+
+.thumb-ai { background: radial-gradient(circle, rgba(34,211,238,.18), transparent 35%), #070b10; }
+.ai-core { position: absolute; inset: 22%; display: grid; place-items: center; border: 1px solid rgba(34,211,238,.4); border-radius: 20px; background: linear-gradient(135deg, rgba(34,211,238,.09), rgba(43,107,255,.08)); box-shadow: 0 0 40px rgba(34,211,238,.13), inset 0 0 30px rgba(43,107,255,.08); }
+.ai-label { z-index: 2; font-weight: 900; font-size: 12px; letter-spacing: .12em; }
+
+.thumb-template { background: linear-gradient(135deg, rgba(139,92,246,.18), transparent), #0b0d11; }
+.device { position: absolute; width: 70%; height: 52%; left: 15%; top: 21%; border: 4px solid #272d38; border-radius: 8px; background: linear-gradient(135deg, #171c26, #0d1016); box-shadow: 15px 20px 35px rgba(0,0,0,.55); transform: perspective(700px) rotateX(3deg) rotateY(-8deg); }
+.device-screen { position: absolute; inset: 7px; padding: 8px; border-radius: 3px; background: linear-gradient(135deg, rgba(43,107,255,.14), rgba(139,92,246,.08)), #10131a; }
+.dashboard-lines { display: grid; gap: 5px; }
+.dashboard-lines span { height: 5px; border-radius: 4px; background: rgba(255,255,255,.1); }
+.dashboard-lines span:first-child { width: 55%; background: rgba(43,107,255,.6); }
+
+.thumb-lut { background: linear-gradient(90deg, #252d32 0 49.5%, #06080a 49.5% 50.5%, #a66b4c 50.5% 100%); }
+.lut-label { position: absolute; bottom: 10px; left: 10px; right: 10px; display: flex; justify-content: space-between; color: white; font-size: 8px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+
+.card-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 7px; }
+.tag { display: inline-flex; align-items: center; padding: 5px 7px; border-radius: 999px; background: rgba(43,107,255,.1); border: 1px solid rgba(43,107,255,.16); color: #8eacff; font-size: 8px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+.tag.green { color: #71e6bd; background: rgba(16,185,129,.08); border-color: rgba(16,185,129,.16); }
+.tag.purple { color: #c4a7ff; background: rgba(139,92,246,.08); border-color: rgba(139,92,246,.16); }
+
+.product-category { color: var(--text-muted); font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+.product-title { min-height: 43px; font-size: 14px; line-height: 1.2; letter-spacing: -.025em; font-weight: 850; }
+.product-description { margin-top: 5px; color: var(--text-muted); font-size: 10px; line-height: 1.45; }
+.product-footer { display: flex; align-items: center; justify-content: space-between; gap: 9px; margin-top: 13px; }
+
+.price { font-size: 18px; font-weight: 950; letter-spacing: -.05em; white-space: nowrap; }
+.price small { display: block; color: var(--text-muted); font-size: 8px; font-weight: 600; letter-spacing: 0; }
+
+.card-actions { display: grid; grid-template-columns: 1fr 1.2fr; gap: 7px; flex: 1; max-width: 230px; }
+.action-button { min-height: 37px; padding: 0 9px; border-radius: 10px; color: var(--text-secondary); background: rgba(255,255,255,.035); border: 1px solid var(--border); font-size: 9px; font-weight: 850; transition: transform var(--transition), background var(--transition), color var(--transition); }
+.action-button:hover { color: white; background: rgba(255,255,255,.07); transform: translateY(-1px); }
+.action-button.primary { color: white; background: var(--blue); border-color: transparent; box-shadow: 0 6px 18px var(--blue-glow); }
+.action-button.success { color: white; background: var(--green); border-color: transparent; box-shadow: 0 6px 18px var(--green-glow); }
+
+.site-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-top: 24px; padding: 18px 2px; color: var(--text-muted); font-size: 9px; }
+.footer-brand { font-weight: 800; color: var(--text-secondary); }
+.footer-controls { display: flex; gap: 7px; }
+.footer-select { height: 32px; padding: 0 10px; border: 1px solid var(--border); border-radius: 9px; color: var(--text-secondary); background: var(--surface); font-size: 9px; outline: none; }
+
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom)); z-index: 100; width: min(calc(100% - 30px), 420px); transform: translate(-50%, 30px) scale(.98); padding: 13px 15px; border: 1px solid var(--border); border-radius: 14px; color: white; background: rgba(22,25,32,.96); box-shadow: var(--shadow); opacity: 0; pointer-events: none; transition: opacity var(--transition), transform var(--transition); }
+.toast.visible { opacity: 1; transform: translate(-50%, 0) scale(1); }
+.toast strong { display: block; font-size: 11px; margin-bottom: 2px; }
+.toast span { color: var(--text-secondary); font-size: 9px; }
+
+@media (min-width: 600px) {
+  .app { padding-left: 24px; padding-right: 24px; }
+  .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sales-stats { display: flex; }
+  .hero { padding: 42px; }
+}
+@media (min-width: 900px) {
+  .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .hero { min-height: 320px; display: flex; flex-direction: column; justify-content: center; }
+  .brand-header { margin-top: 10px; }
+  .audio-player { grid-template-columns: auto minmax(200px, 1fr) auto; }
+}
+@media (min-width: 1180px) {
+  .product-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="brand-header">
+    <a href="#" class="brand" aria-label="Telldouble Productions home">
+      <div class="brand-mark" aria-hidden="true">T2</div>
+      <div class="brand-copy">
+        <h1>Telldouble Productions</h1>
+        <p>Dream B.I.G. Music Digital AI</p>
+      </div>
+    </a>
+    <div class="status-pill">
+      <span class="status-dot"></span>
+      DIGITAL STORE LIVE
+    </div>
+  </header>
+
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="eyebrow">Dream B.I.G. / Creator Store</div>
+    <h2 id="hero-title">Build. Create. <span>Dream B.I.G.</span></h2>
+    <p>Beats, stems, stories, creator systems, AI tools, templates and post-production assets engineered for artists and digital creators.</p>
+    <div class="hero-actions">
+      <button class="hero-button" onclick="scrollToStore()">Explore the Store</button>
+      <button class="hero-button secondary" onclick="showToast('Creator ecosystem', 'Music, digital products, AI systems and production tools.')">What's Inside</button>
+    </div>
+  </section>
+
+  <section class="audio-player" aria-label="Audio preview player">
+    <button class="play-button" id="playButton" aria-label="Play audio preview" aria-pressed="false">►</button>
+    <div class="track-info">
+      <div class="track-title">
+        <span id="trackTitle">Tonight</span>
+        <small>LIVE PREVIEW</small>
+      </div>
+      <div class="waveform" id="waveform" aria-hidden="true"></div>
+    </div>
+    <div class="sales-stats">
+      <div class="stat">
+        <div class="stat-value" id="leaseCount">247</div>
+        <div class="stat-label">Leases Sold</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">$18.4K</div>
+        <div class="stat-label">Gross Revenue</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">24-BIT</div>
+        <div class="stat-label">Audio Quality</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="store" aria-labelledby="store-title">
+    <div class="toolbar">
+      <div class="filters" role="tablist" aria-label="Product categories">
+        <button class="filter-button active" data-filter="all" role="tab">All</button>
+        <button class="filter-button" data-filter="music" role="tab">Music</button>
+        <button class="filter-button" data-filter="digital" role="tab">Digital</button>
+        <button class="filter-button" data-filter="ai" role="tab">AI + Tech</button>
+        <button class="filter-button" data-filter="post" role="tab">Presets</button>
+      </div>
+      <div class="view-switch" aria-label="Layout style">
+        <button class="view-button active" id="gridView" aria-label="Compact grid" title="Compact Grid">■</button>
+        <button class="view-button" id="rowView" aria-label="Full row links" title="Full Row Links">=</button>
+      </div>
+    </div>
+
+    <div class="product-grid" id="productGrid">
+      <!-- FAN + STORY -->
+      <article class="product-card" data-category="music">
+        <div class="product-card-inner">
+          <div class="thumbnail thumb-audio">
+            <div class="big-type">TONIGHT</div>
+            <div class="audio-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="card-meta">
+            <span class="tag">Trending</span>
+            <span class="product-category">Audio Preview</span>
+          </div>
+          <h3 class="product-title">Tonight's Instrumental Preview (Cover Master)</h3>
+          <p class="product-description">High-quality instrumental preview for the original Tonight experience.</p>
+          <div class="product-footer">
+            <div class="price">$1.00 <small>instant download</small></div>
+            <div class="card-actions">
+              <button class="action-button" onclick="previewProduct('Tonight')">► Preview</button>
+              <button class="action-button primary" onclick="checkout('Tonight Instrumental', '$1.00')">$1 Get</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="digital">
+        <div class="product-card-inner">
+          <div class="thumbnail thumb-book">
+            <div class="book-cover">
+              <strong>8 YEARS<br />AFTER<br />TONIGHT</strong>
+              <small>My Story of Viral Success</small>
+            </div>
+          </div>
+          <div class="card-meta">
+            <span class="tag green">New Release</span>
+            <span class="product-category">eBook</span>
+          </div>
+          <h3 class="product-title">8 Years After "Tonight": My Story of Viral Success</h3>
+          <p class="product-description">The story behind the music, momentum, lessons and journey after viral success.</p>
+          <div class="product-footer">
+            <div class="price">$4.99 <small>digital book</small></div>
+            <div class="card-actions">
+              <button class="action-button" onclick="previewProduct('eBook excerpt')">Excerpt</button>
+              <button class="action-button primary" onclick="checkout('8 Years After Tonight', '$4.99')">$4.99 Get</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="digital">
+        <div class="product-card-inner">
+          <div class="thumbnail thumb-template">
+            <div class="device" aria-hidden="true">
+              <div class="device-screen">
+                <div class="dashboard-lines"><span></span><span></span><span></span><span></span></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-meta">
+            <span class="tag purple">Physical</span>
+            <span class="product-category">Merch</span>
+          </div>
+          <h3 class="product-title">Telldouble "Tonight" Limited Edition Cyber Cap</h3>
+          <p class="product-description">Limited-edition branded cyber aesthetic merch.</p>
+          <div class="product-footer">
+            <div class="price">$25.00 <small>limited edition</small></div>
+            <div class="card-actions">
+              <button class="action-button" onclick="previewProduct('Cyber Cap')">View</button>
+              <button class="action-button primary" onclick="checkout('Cyber Cap', '$25.00')">$25 Get</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- B2B MUSIC -->
+      <article class="product-card" data-category="music">
+        <div class="product-card-inner">
+          <div class="thumbnail thumb-audio">
+            <div class="big-type">HYPER</div>
+            <div class="audio-wave"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="card-meta">
+            <span class="tag">3:15 WAV</span>
+            <span class="product-category">Beat Lease</span>
+          </div>
+          <h3 class="product-title">Hyperdrive Trap Beat</h3>
+          <p class="product-description">Standard Lease WAV + MP3.</p>
+          <div class="product-footer">
+            <div class="price">$29.99</div>
+            <div class="card-actions">
+              <button class="action-button" onclick="previewProduct('Hyperdrive Trap Beat')">► Preview</button>
+              <button class="action-button primary" onclick="checkout('Hyperdrive Trap Beat Lease', '$29.99')">Lease</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="music">
+        <div class="product-card-inner">
+          <div class="thumbnail thumb-audio">
+            <div class="big-type">MIDNIGHT</div>
+            <div class="audio-wave"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="card-meta">
+            <span class="tag green">3:20 Trackout</span>
+            <span class="product-category">Premium License</span>
+          </div>
+          <h3 class="product-title">Midnight Vibing</h3>
+          <p class="product-description">Unlimited streaming + complete trackout stems.</p>
+          <div class="product-footer">
+            <div class="price">$99.00</div>
+            <div class="card-actions">
+              <button class="action-button" onclick="previewProduct('Midnight Vibing')">► Preview</button>
+              <button class="action-button success" onclick="checkout('Midnight Vibing Premium', '$99.00')">License</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="music">
+        <div class="product-card-inner">
+          <div class="thumbnail thumb-audio">
+            <div class="big-type">LO-FI</div>
+            <div class="audio-wave"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="card-meta">
+            <span class="tag">185 Samples</span>
+            <span class="product-category">Sample Pack</span>
+          </div>
+          <h3 class="product-title">Analog Warmth & Cosmic Lo-Fi Essentials</h3>
+          <p class="product-description">Textures, loops, one-shots and analog-inspired production elements.</p>
+          <div class="product-footer">
+            <div class="price">$19.99</div>
+            <div class="card-actions">
+              <button class="action-button" onclick="previewProduct('Sample Pack')">► Preview</button>
+              <button class="action-button primary" onclick="checkout('Analog Warmth Sample Pack', '$19.99')">Get</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="music">
+        <div class="product-card-inner">
+          <div class="thumbnail thumb-audio">
+            <div class="big-type">NOIR</div>
+            <div class="audio-wave"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="card-meta">
+            <span class="tag purple">12 Stems</span>
+            <span class="product-category">Sync Stems</span>
+          </div>
+          <h3 class="product-title">Cinematic Neo-Noir Cyberpunk Stem Kit</h3>
+          <p class="product-description">Broadcast-ready cinematic production stems.</p>
+          <div class="product-footer">
+            <div class="price">$149.00</div>
+            <div class="card-actions">
+              <button class="action-button" onclick="previewProduct('Neo-Noir Stem Kit')">► Preview</button>
+              <button class="action-button success" onclick="checkout('Neo-Noir Cyberpunk Stem Kit', '$149.00')">License</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CREATOR WORKSPACES -->
+      <article class="product-card" data-category="digital">
+        <div class="product-card-inner">
+          <div class="thumbnail thumb-template">
+            <div class="device"><div class="device-screen"><div class="dashboard-lines"><span></span><span></span><span></span></div></div></div>
+          </div>
+          <div class="card-meta">
+            <span class="tag purple">Notion</span>
+            <span class="product-category">Workspace</span>
+          </div>
+          <h3 class="product-title">All-in-One Creator Notion Workspace</h3>
+          <p class="product-description">Release tracker, split sheets and content calendar.</p>
+          <div class="product-footer">
+            <div class="price">$15.00</div>
+            <div class="card-actions">
+              <button class="action-button" onclick="previewProduct('Creator Notion Workspace')">Demo</button>
+              <button class="action-button primary" onclick="checkout('Creator Notion Workspace', '$15.00')">Get</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="digital">
+        <div class="product-card-inner">
+          <div class="thumbnail thumb-template">
+            <div class="device"><div class="device-screen"><div class="dashboard-lines"><span></span><span></span><span></span></div></div></div>
+          </div>
+          <div class="card-meta">
+            <span class="tag">50+ Templates</span>
+            <span class="product-category">Canva</span>
+          </div>
+          <h3 class="product-title">Media Kit & Cover Art Carousel Pack</h3>
+          <p class="product-description">Customizable social and artist branding layouts.</p>
+          <div class="product-footer">
+            <div class="price">$12.50</div>
+            <div class="card-actions">
+              <button class="action-button" onclick="previewProduct('Canva Pack')">Demo</button>
+              <button class="action-button primary" onclick="checkout('Media Kit Canva Pack', '$12.50')">Get</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="digital">
+        <div class="product-card-inner">
+          <div class="thumbnail thumb-template">
+            <div class="device"><div class="device-screen"><div class="dashboard-lines"><span></span><span></span><span></span></div></div></div>
+          </div>
+          <div class="card-meta">
+            <span class="tag green">HTML/Framer</span>
+            <span class="product-category">Web Layout</span>
+          </div>
+          <h3 class="product-title">Minimalist Portfolio Website Layout</h3>
+          <p class="product-description">Modern portfolio and link-in-bio architecture.</p>
+          <div class="product-footer">
+            <div class="price">$35.00</div>
+            <div class="card-actions">
+              <button class="action-button" onclick="previewProduct('Portfolio Website')">Demo</button>
+              <button class="action-button primary" onclick="checkout('Minimalist Portfolio Layout', '$35.00')">Get</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- AI / TECH -->
+      <article class="product-card" data-category="ai">
+        <div class="product-card-inner">
+          <div class="thumbnail thumb-ai">
+            <div class="ai-core"><div class="ai-label">PROMPT://12</div></div>
+          </div>
+          <div class="card-meta">
+            <span class="tag">12 Prompts</span>
+            <span class="product-category">AI System</span>
+          </div>
+          <h3 class="product-title">Creative Songwriting Prompt Pack</h3>
+          <p class="product-description">Advanced system prompts for songwriting, ideation and creative development.</p>
+          <div class="product-footer">
+            <div class="price">$15.00</div>
+            <div class="card-actions">
+              <button class="action-button" onclick="previewProduct('Songwriting Prompt Pack')">Demo</button>
+              <button class="action-button primary" onclick="checkout('Creative Songwriting Prompt Pack', '$15.00')">Get</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="ai">
+        <div class="product-card-inner">
+          <div class="thumbnail thumb-ai">
+            <div class="ai-core"><div class="ai-label">MIDI://AI</div></div>
+          </div>
+          <div class="card-meta">
+            <span class="tag purple">Chatbot Blueprint</span>
+            <span class="product-category">AI Bot</span>
+          </div>
+          <h3 class="product-title">Melodic MIDI Co-Pilot Assistant</h3>
+          <p class="product-description">AI assistant architecture for melodic MIDI generation and musical ideation.</p>
+          <div class="product-footer">
+            <div class="price">$35.00</div>
+            <div class="card-actions">
+              <button class="action-button" onclick="previewProduct('MIDI Co-Pilot')">Demo</button>
+              <button class="action-button success" onclick="checkout('Melodic MIDI Co-Pilot', '$35.00')">Enroll</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="ai">
+        <div class="product-card-inner">
+          <div class="thumbnail thumb-ai">
+            <div class="ai-core"><div class="ai-label">AUTO://FLOW</div></div>
+          </div>
+          <div class="card-meta">
+            <span class="tag green">Make / Zapier</span>
+            <span class="product-category">Automation</span>
+          </div>
+          <h3 class="product-title">Distro Audio Release Automator</h3>
+          <p class="product-description">Automated release pipeline for distribution and creator operations.</p>
+          <div class="product-footer">
+            <div class="price">$45.00</div>
+            <div class="card-actions">
+              <button class="action-button" onclick="previewProduct('Release Automator')">Demo</button>
+              <button class="action-button success" onclick="checkout('Distro Audio Release Automator', '$45.00')">Get</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- POST PRODUCTION -->
+      <article class="product-card" data-category="post">
+        <div class="product-card-inner">
+          <div class="thumbnail thumb-audio">
+            <div class="big-type">VOCAL</div>
+            <div class="audio-wave"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <div class="card-meta">
+            <span class="tag">Ableton/FL/Logic</span>
+            <span class="product-category">DAW Preset</span>
+          </div>
+          <h3 class="product-title">Pro Vocal Audio Mixing Chain Preset</h3>
+          <p class="product-description">Production-ready vocal processing chain for major DAWs.</p>
+          <div class="product-footer">
+            <div class="price">$24.99</div>
+            <div class="card-actions">
+              <button class="action-button" onclick="previewProduct('Vocal Mixing Chain')">Demo</button>
+              <button class="action-button primary" onclick="checkout('Pro Vocal Mixing Chain', '$24.99')">Get</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="post">
+        <div class="product-card-inner">
+          <div class="thumbnail thumb-lut">
+            <div class="lut-label"><span>Before</span><span>After</span></div>
+          </div>
+          <div class="card-meta">
+            <span class="tag purple">.CUBE</span>
+            <span class="product-category">Video LUTs</span>
+          </div>
+          <h3 class="product-title">Cinematic Warmth Video LUT Pack</h3>
+          <p class="product-description">Cinematic color grading filters for Premiere and Final Cut.</p>
+          <div class="product-footer">
+            <div class="price">$19.00</div>
+            <div class="card-actions">
+              <button class="action-button" onclick="previewProduct('Cinematic LUT Pack')">Demo</button>
+              <button class="action-button primary" onclick="checkout('Cinematic Warmth LUT Pack', '$19.00')">Get</button>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="post">
+        <div class="product-card-inner">
+          <div class="thumbnail thumb-lut">
+            <div class="lut-label"><span>Raw</span><span>Moody</span></div>
+          </div>
+          <div class="card-meta">
+            <span class="tag">8 XMP / DNG</span>
+            <span class="product-category">Lightroom</span>
+          </div>
+          <h3 class="product-title">Moody Minimalist Lightroom Presets</h3>
+          <p class="product-description">Minimal, cinematic filters for creator photography.</p>
+          <div class="product-footer">
+            <div class="price">$12.50</div>
+            <div class="card-actions">
+              <button class="action-button" onclick="previewProduct('Lightroom Presets')">Demo</button>
+              <button class="action-button primary" onclick="checkout('Moody Minimalist Lightroom Presets', '$12.50')">Get</button>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div>
+      <div class="footer-brand">TEL LDOUBLE PRODUCTIONS / DREAM B.I.G.</div>
+      <div>Create different. Build bigger.</div>
+    </div>
+    <div class="footer-controls">
+      <label>
+        <span class="sr-only">Currency</span>
+        <select class="footer-select" id="currencySelector" aria-label="Currency selector">
+          <option value="USD">USD $</option>
+          <option value="EUR">EUR €</option>
+          <option value="GBP">GBP £</option>
+        </select>
+      </label>
+      <select class="footer-select" id="footerLayout" aria-label="Layout style">
+        <option value="grid">Compact Grid</option>
+        <option value="row">Full Row Links</option>
+      </select>
+    </div>
+  </footer>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <strong id="toastTitle"></strong>
+  <span id="toastMessage"></span>
+</div>
+
+<script>
+const productGrid = document.getElementById("productGrid");
+const filterButtons = document.querySelectorAll(".filter-button");
+const gridView = document.getElementById("gridView");
+const rowView = document.getElementById("rowView");
+const footerLayout = document.getElementById("footerLayout");
+
+// WAVEFORM GENERATOR
+const waveform = document.getElementById("waveform");
+for (let i = 0; i < 70; i++) {
+  const bar = document.createElement("span");
+  const height = Math.floor(Math.random() * 23) + 5;
+  bar.style.height = `${height}px`;
+  bar.style.animationDelay = `${Math.random() * -1.2}s`;
+  waveform.appendChild(bar);
+}
+
+// AUDIO PLAYER PREVIEW
+let isPlaying = false;
+const playButton = document.getElementById("playButton");
+const trackTitle = document.getElementById("trackTitle");
+
+playButton.addEventListener("click", () => {
+  isPlaying = !isPlaying;
+  playButton.textContent = isPlaying ? "II" : "►";
+  playButton.setAttribute("aria-pressed", String(isPlaying));
+  trackTitle.textContent = isPlaying ? "Midnight Vibing" : "Tonight";
+  showToast(
+    isPlaying ? "Preview playing" : "Preview paused",
+    isPlaying ? "Now previewing Midnight Vibing." : "Audio preview paused."
+  );
+});
+
+// CATEGORY FILTERS
+filterButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    filterButtons.forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+    const filter = button.dataset.filter;
+    document.querySelectorAll(".product-card").forEach(card => {
+      const category = card.dataset.category;
+      const visible = filter === "all" || category === filter;
+      card.style.display = visible ? "" : "none";
+    });
+  });
+});
+
+// GRID / ROW VIEW SWITCHER
+function setLayout(layout) {
+  const isRow = layout === "row";
+  productGrid.classList.toggle("row-view", isRow);
+  gridView.classList.toggle("active", !isRow);
+  rowView.classList.toggle("active", isRow);
+  footerLayout.value = layout;
+}
+
+gridView.addEventListener("click", () => setLayout("grid"));
+rowView.addEventListener("click", () => setLayout("row"));
+footerLayout.addEventListener("change", event => setLayout(event.target.value));
+
+function previewProduct(name) {
+  showToast("Preview", `${name} demo opened. Connect your audio/video/demo URL here.`);
+}
+
+function checkout(product, price) {
+  showToast("Checkout ready", `${product} (${price}) - connect your payment processor here.`);
+}
+
+let toastTimer;
+function showToast(title, message) {
+  const toast = document.getElementById("toast");
+  document.getElementById("toastTitle").textContent = title;
+  document.getElementById("toastMessage").textContent = message;
+  toast.classList.add("visible");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("visible"), 3200);
+}
+
+function scrollToStore() {
+  document.getElementById("store").scrollIntoView({ behavior: "smooth" });
+}
+
+document.getElementById("currencySelector").addEventListener("change", event => {
+  const currency = event.target.value;
+  showToast("Currency changed", `Store currency set to ${currency}.`);
+});
+
+// ACCESSIBILITY
+const style = document.createElement("style");
+style.textContent = `.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }`;
+document.head.appendChild(style);
+
+// DEMO LIVE SALES COUNTER
+let sales = 247;
+setInterval(() => {
+  if (Math.random() > .72) {
+    sales += 1;
+    document.getElementById("leaseCount").textContent = sales;
+  }
+}, 9000);
+</script>
+</body>
+</html>
